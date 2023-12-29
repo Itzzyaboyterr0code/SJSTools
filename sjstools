@@ -1,0 +1,45 @@
+//Set variables
+var SJStools = {};
+
+var SJStools_keys = {};
+SJStools_keys.up = null;
+SJStools_keys.down = null;
+
+SJStools.input = {};
+
+//Check if key down
+document.addEventListener('keydown', Downcheck);
+
+//Check if key up
+document.addEventListener('keyup', Upcheck);
+
+function Downcheck() {
+    if(event.code !== SJStools_keys.down) {
+        SJStools_keys.up = null;
+        SJStools_keys.down = event.code;
+    }
+}
+
+function Upcheck() {
+    if(event.code !== SJStools_keys.up) {
+        SJStools_keys.down = null;
+        SJStools_keys.up = event.code;
+    }
+    document.removeEventListener('keyup', Upcheck);
+}
+
+//Input funcs
+SJStools.input.isKeyDown = function (key) {
+    if(SJStools_keys.down == key) {
+        SJStools_keys.down = null;
+        return true;
+    }
+}
+
+
+SJStools.input.isKeyUp = function (key) {
+    if(SJStools_keys.up == key) {
+        SJStools_keys.up = null;
+        return true;
+    }
+}
